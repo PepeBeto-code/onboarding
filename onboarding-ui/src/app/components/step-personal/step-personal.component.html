@@ -1,0 +1,37 @@
+<div class="section">
+    <p class="section__subtitle">Información Personal</p>
+    <form [formGroup]="form">
+        <div class="mb-4">
+            <label class="form__label">Correo electrónico</label>
+            <input type="email" formControlName="email" class="form__input" placeholder="ejemplo@correo.com" />
+            <div *ngIf="form.controls['email'].touched && form.controls['email'].invalid">
+                <small *ngIf="form.controls['email'].errors?.['required']" class="form__error">Email is required.</small>
+                <small *ngIf="form.controls['email'].errors?.['email']" class="form__error">Please enter a valid email address.</small>
+            </div>
+            <small *ngIf="validationErrors['email']" class="form__error">
+                {{ validationErrors['email'] }}
+            </small>
+          </div>
+          <div class="mb-4">
+            <label class="form__label">Teléfono</label>
+            <input type="text" formControlName="phone" class="form__input" placeholder="5533446688" />
+            <div *ngIf="form.controls['phone'].touched && form.controls['phone'].invalid">
+              <small *ngIf="form.controls['phone'].errors?.['required']" class="form__error">Phone is required.</small>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="form__label">Cumpleaños</label>
+            <input type="date" formControlName="birthday" class="form__input" />
+            <div *ngIf="form.controls['phone'].touched && form.controls['birthday'].invalid">
+              <small *ngIf="form.controls['birthday'].errors?.['required']" class="form__error">Birthday is required.</small>
+            </div>
+            <small *ngIf="validationErrors['birthday']" class="form__error">
+              {{ validationErrors['birthday'] }}
+          </small>
+          </div>
+        <button [disabled]="this.form.invalid" *ngIf="modo === 'onboarding'" type="button" class="button button--icon" (click)="onNext()"><i class="fa-solid fa-arrow-right"></i></button>
+        <div *ngIf="serverError" class="mt-4 text-red-600 text-sm text-center">
+            {{ serverError }}
+        </div>
+      </form>      
+</div>

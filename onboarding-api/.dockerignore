@@ -1,0 +1,19 @@
+# Ignora carpetas y archivos típicos generados
+
+target/
+.idea/
+_.iml
+_.log
+
+# Ignora configuración local
+
+.settings/
+.project
+.classpath
+
+.env
+
+# Ignora archivos de control de versiones
+
+.git/
+.gitignore

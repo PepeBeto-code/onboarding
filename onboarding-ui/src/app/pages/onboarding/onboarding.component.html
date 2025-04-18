@@ -1,0 +1,29 @@
+<div class="page">
+  <button  type="button" class="button button--icon button--back" (click)="on()"><i class="fa-solid fa-arrow-left"></i></button>
+  <div class="section bg-white">
+    <div class="flex justify-between mb-6">
+      <div class="flex-1 text-center py-2 border-b-4"
+           [ngClass]="currentStep === 1 ? 'border-[var(--primary-color)] font-semibold text-[var(--primary-color)]' : 'border-gray-200 text-gray-500'">
+        Paso 1<br><small class="text-xs">Información Personal</small>
+      </div>
+      <div class="flex-1 text-center py-2 border-b-4"
+           [ngClass]="currentStep === 2 ? 'border-[var(--primary-color)] font-semibold text-[var(--primary-color)]' : 'border-gray-200 text-gray-500'">
+        Paso 2<br><small class="text-xs">Dirección</small>
+      </div>
+      <div class="flex-1 text-center py-2 border-b-4"
+           [ngClass]="currentStep === 3 ? 'border-[var(--primary-color)] font-semibold text-[var(--primary-color)]' : 'border-gray-200 text-gray-500'">
+        Paso 3<br><small class="text-xs">Documentos</small>
+      </div>
+    </div>
+  
+    <div>
+      <ng-container [ngSwitch]="currentStep">
+         <app-step-personal (loadingChange)="handleLoadingChange($event)" *ngSwitchCase="1" (next)="nextStep()"></app-step-personal>
+        <app-step-address (loadingChange)="handleLoadingChange($event)" *ngSwitchCase="2" (prev)="previousStep()" (next)="nextStep()"></app-step-address>
+        <app-step-documents (loadingChange)="handleLoadingChange($event)" *ngSwitchCase="3" (prev)="previousStep()" (finish)="finish()"></app-step-documents>
+      </ng-container>
+    </div>
+  </div>
+  <app-loading-overlay [isLoading]="isLoading"></app-loading-overlay>
+</div>
+  

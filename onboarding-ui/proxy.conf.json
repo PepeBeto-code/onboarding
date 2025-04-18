@@ -1,0 +1,14 @@
+{
+  "/api": {
+    "target": "http://nginx", 
+    "secure": false,         
+    "logLevel": "debug",      
+    "changeOrigin": true    
+  },
+  "/auth": {
+    "target": "http://nginx",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

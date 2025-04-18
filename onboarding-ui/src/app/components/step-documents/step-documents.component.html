@@ -1,0 +1,57 @@
+<div class="section">
+  <div class="circle circle--top-sm !bg-[var(--success-color)]"></div>
+  <div class="circle circle--button-sm !bg-[var(--alert-color)]"></div>
+    <p class="section__subtitle">Carga de Documentos</p>
+    <form [formGroup]="form" class="space-y-4">
+      <div>
+        <label class="form__label">Tipo de documento</label>
+        <select formControlName="docType" class="form__input">
+          <option value="">Selecciona uno</option>
+          <option value="INE">INE</option>
+          <option value="comprobante">Comprobante de domicilio</option>
+        </select>
+      </div>
+  
+      <div>
+        <label class="form__label">Selecciona archivo</label>
+          <!-- Input oculto real -->
+          <input #fileInput type="file" accept=".pdf,image/*" (change)="onFileSelected($event)" hidden />
+
+          <!-- Botón para abrir el input -->
+          <button  type="button" class="button !bg-[var(--secondary-color)] !w-[40%]" (click)="fileInput.click()">
+            <p *ngIf="fileName" class="contents">Cambiar</p>
+            <p *ngIf="!fileName" class="contents">Seleccionar</p> 
+             archivo
+          </button>
+
+          <!-- Vista visual del archivo cargado -->
+          <div *ngIf="fileName" class="text-sm text-gray-600 mt-2">
+            Archivo cargado: <strong>{{ fileName }}</strong>
+          </div>
+      </div>
+
+      <!-- Vista previa imagen -->
+      <img *ngIf="fileType?.startsWith('image/')" 
+        [src]="previewUrl" 
+        alt="Preview" 
+        class="max-h-40 mt-1 border rounded-md m-auto" />
+
+      <!-- Vista previa PDF -->
+      <ng-container *ngIf="fileType === 'application/pdf'">
+        <iframe
+          [src]="previewUrl"
+          width="100%"
+          height="600px"
+          style="border: none;"
+        ></iframe>   
+       </ng-container>
+
+      <div *ngIf="uploadError" class="form__error">{{ uploadError }}</div>
+  
+      <div *ngIf="modo === 'onboarding'" class="flex justify-between mt-4">
+        <button type="button" class="button button--icon" (click)="onPrev()"><i class="fa-solid fa-arrow-left"></i></button>
+        <button [disabled]="this.form.invalid" type="button" class="button button--icon" (click)="onSubmit()"><i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </form>
+  </div>
+  

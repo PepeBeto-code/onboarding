@@ -1,0 +1,51 @@
+<div class="section">
+  <div class="circle circle--top-sm circle--yellow"></div>
+  <div class="circle circle--button-sm"></div>
+
+    <p class="section__subtitle">Dirección</p>
+    <form [formGroup]="form" class="space-y-4">
+  
+      <div class="mb-4">
+        <label class="form__label">Calle</label>
+        <input formControlName="street" type="text" class="form__input" placeholder="Calle 4"/>
+        <div *ngIf="form.controls['street'].touched && form.controls['street'].invalid">
+          <small class="form__error">La calle es obligatoria.</small>
+        </div>
+      </div>
+  
+      <div class="mb-4">
+        <label class="form__label">Número</label>
+        <input formControlName="number" type="text" class="form__input" placeholder="4"/>
+        <div *ngIf="form.controls['number'].touched && form.controls['number'].invalid">
+          <small class="form__error">El número es obligatorio.</small>
+        </div>
+      </div>
+  
+      <div class="mb-4">
+        <label class="form__label">Código Postal</label>
+        <input formControlName="postalCode" type="text" class="form__input" placeholder="77886"/>
+        <div *ngIf="form.controls['postalCode'].touched && form.controls['postalCode'].invalid">
+          <small class="form__error">El código postal es obligatorio.</small>
+        </div>
+      </div>
+  
+      <div class="mb-4">
+        <label class="form__label">Ciudad</label>
+        <input formControlName="city" type="text" class="form__input" placeholder="Mexico"/>
+        <div *ngIf="form.controls['city'].touched && form.controls['city'].invalid">
+          <small class="form__error">La ciudad es obligatoria.</small>
+        </div>
+      </div>
+  
+      <div *ngIf="modo === 'onboarding'" class="flex justify-between mt-4">
+        <button type="button" class="button button--icon" (click)="onPrev()"><i class="fa-solid fa-arrow-left"></i></button>
+        <button [disabled]="this.form.invalid" type="button" class="button button--icon" (click)="onNext()"><i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+  
+      <div *ngIf="serverError" class="mt-4 text-red-600 text-sm text-center">
+        {{ serverError }}
+      </div>
+  
+    </form>
+  </div>
+  

@@ -1,0 +1,50 @@
+<div class="page">
+    <button  type="button" class="button button--icon button--back" (click)="on()"><i class="fa-solid fa-arrow-left"></i></button>
+
+      <!-- Elementos decorativos -->
+    <div class="circle circle--top-lg">
+        <svg width="300" height="300" fill="none" class="opacity-20">
+        <circle cx="150" cy="150" r="150" fill="#60A5FA"/>
+        </svg>
+    </div>
+    <div class="circle circle--button-lg">
+        <svg width="250" height="250" fill="none" class="opacity-20">
+        <circle cx="125" cy="125" r="125" fill="#4338CA"/>
+        </svg>
+    </div>
+
+    <div class="section">
+        <h2 class="section__title">Editar perfil</h2>
+
+        <app-step-personal
+            (loadingChange)="handleLoadingChange($event)"
+            class="w-full"
+            [form]="personalForm"
+            [modo]="'edicion'">
+        </app-step-personal>
+    
+    
+        <app-step-address
+            (loadingChange)="handleLoadingChange($event)"
+            class="w-full"
+            [form]="addressForm"
+            [modo]="'edicion'">
+        </app-step-address>
+
+
+        <app-step-documents
+            (loadingChange)="handleLoadingChange($event)"
+            class="w-full"
+            [form]="documentForm"
+            [modo]="'edicion'">
+        </app-step-documents>
+        
+        <button [disabled]="this.personalForm.invalid ||
+                            this.addressForm.invalid || 
+                            this.documentForm.invalid ||
+                            (!this.personalForm.dirty && !this.addressForm.dirty && !this.documentForm.dirty)
+                            " 
+                class="button !w-[80%]" (click)="guardarCambios()">Guardar cambios</button>
+    </div>
+    <app-loading-overlay [isLoading]="isLoading"></app-loading-overlay>
+</div>

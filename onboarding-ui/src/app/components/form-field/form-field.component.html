@@ -1,0 +1,40 @@
+<div class="mb-4">
+    <label class="form__label">{{ label }}</label>
+    <input
+      [type]="type"
+      [formControlName]="formControlName"
+      [(ngModel)]="value"
+      (ngModelChange)="onChange($event)"
+      (blur)="onTouched()"
+      class="form__input"
+      [placeholder]="placeholder"
+    />
+  
+    <div *ngIf="form.controls[formControlName].touched && form.controls[formControlName].invalid">
+      <small
+        *ngIf="form.controls[formControlName].errors?.['required']"
+        class="form__error"
+      >
+        {{ label }} es obligatorio.
+      </small>
+      <small
+        *ngIf="form.controls[formControlName].errors?.['email']"
+        class="form__error"
+      >
+        Ingresa un correo válido.
+      </small>
+      <small
+        *ngIf="form.controls[formControlName].errors?.['minlength']"
+        class="form__error"
+      >
+        {{ label }} debe tener al menos {{
+          form.controls[formControlName].errors?.['minlength'].requiredLength
+        }} caracteres.
+      </small>
+    </div>
+  
+    <small *ngIf="validationErrors && validationErrors?.[formControlName]" class="form__error">
+      {{ validationErrors[formControlName] }}
+    </small>
+  </div>
+  

@@ -1,0 +1,21 @@
+services:
+  backend:
+    container_name: onboarding-back-container
+    image: onboarding-back-image
+    build: .
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    depends_on:
+      - database
+
+  database:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: onboarding
+    ports:
+      - "5432:5432"

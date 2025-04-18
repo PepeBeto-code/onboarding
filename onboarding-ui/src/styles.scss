@@ -1,0 +1,174 @@
+/* You can add global styles to this file, and also import other style files */
+@use "tailwindcss" as *;
+
+// _variables.scss
+
+:root {
+  --font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";;
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --bg-color: oklch(88.2% 0.059 254.128);
+  --primary-color: oklch(45.7% 0.24 277.023);;
+  --secondary-color: #f97316;
+  --alert-color: #ef4444;
+  --success-color: #10b981;
+}
+
+$text-primary: var(--text-primary);
+$text-secondary: var(--text-secondary);
+$font-family: var(--font-family);
+$bg-color: var(--bg-color);
+$primary-color: var(--primary-color);
+$secondary-color: var(--secondary-color);
+$alert-color: var(--alert-color);
+$success-color: var(--success-color);
+
+// _mixins.scss
+
+@mixin text-style($size: inherit,
+  $weight: 400,
+  $color: $text-primary,
+  $font-family: $font-family,
+  $line-height: calc(2.5 / 2.25)) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height !important;
+  color: $color;
+  font-family: $font-family !important;
+}
+
+.form{
+  color: $text-primary !important;
+  margin: auto;
+  @apply my-4;
+
+  &__title{
+    @include text-style(1.5rem, $weight: 800);
+    @apply text-center mb-4;
+  }
+
+  &__label{
+    text-align: start;
+    @include text-style(0.875rem, $color: $text-secondary,$line-height: calc(1.25 / 0.875));
+    @apply block text-sm font-medium mb-1;
+  }
+
+  &__input{
+    color: $text-primary;
+    @apply w-full px-3 py-2 border border-indigo-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500;
+
+    &::placeholder {
+      color: $text-secondary; // Usa la variable que quieras
+      opacity: 0.5; // Opcional, para asegurarte que no se vea transparente
+    }
+  }
+
+  &__submit{
+    background: $primary-color;
+    @apply w-full text-white py-2 rounded-md hover:bg-blue-700 transition-all;
+  }
+
+  &__error{
+    display: block;
+    width: 100%;
+    text-align: start;
+    @apply text-red-500 text-sm font-medium mt-1;
+  }
+}
+
+.page{
+  @apply min-h-screen flex flex-col items-center justify-center bg-gradient-to-br p-6 relative overflow-hidden ; 
+  --tw-gradient-stops: var(--bg-color), var(--bg-color);
+}
+
+.circle{
+  @apply absolute transform;
+
+  &--top-lg{
+    @apply top-0 left-0 -translate-x-1/2 -translate-y-1/2;
+  }
+
+  &--button-lg{
+    @apply bottom-0 right-0 translate-x-1/2 translate-y-1/2;
+  }
+
+  &--top-sm{
+    background-color: $bg-color;
+    @apply top-0 right-0 translate-x-1/3 -translate-y-1/3 w-32 h-32 opacity-30 rounded-full;
+  }
+
+  &--button-sm{
+    background-color: $secondary-color;
+    @apply absolute bottom-0 left-0 transform -translate-x-1/3 translate-y-1/3 w-32 h-32 opacity-20 rounded-full; 
+  }
+
+  &--yellow{
+    @apply bg-yellow-400;;
+  }
+}
+
+.section{
+  @apply relative z-10 text-center container w-full p-10 space-y-8 rounded-2xl !border-0;
+
+  &--form{
+    @apply bg-white shadow-xl overflow-hidden !max-w-lg;
+  }
+
+  &--landing{
+    & .section__content{
+      color: $text-secondary;
+    }
+  }
+
+  &__title{
+    @include text-style(2.25rem, $weight: 800, $color: $primary-color);
+  }
+
+  &__subtitle{
+    text-align: start;
+    @include text-style(1.85rem, $weight: 800, $color: $primary-color);
+  }
+
+  &__content{
+    @include text-style(1.125rem, $color: $text-primary);
+  }
+}
+
+.button{
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+  background: $primary-color;
+  @apply w-full hover:bg-indigo-500 text-white text-lg font-semibold py-3 px-6 rounded-xl shadow transition transform hover:-translate-y-0.5;
+
+  &--secondary{
+    @apply bg-white border border-indigo-600 text-indigo-600 hover:bg-indigo-50;
+  }
+
+  &--back{
+    z-index: 100000;
+    position: fixed;
+    top: 18px;
+    left: 30px;
+    z-index: 1000;
+  }
+
+  &--icon{
+    background: $secondary-color;
+    color: $primary-color;
+    border-radius: 20px;
+    width: 60px;
+    height: 53px;
+
+    &:hover{
+      color: white;
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5; /* Reduce la opacidad cuando el botón está deshabilitado */
+    cursor: not-allowed; /* Cambia el cursor para indicar que el botón no es interactivo */
+  }
+}
+
+

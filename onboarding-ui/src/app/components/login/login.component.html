@@ -1,0 +1,53 @@
+<div class="page">
+    <div class="section section--form">
+      <div class="circle circle--top-sm"></div>
+      <div class="circle circle--button-sm"></div>
+      <h2 class="section__title">Iniciar Sesión</h2>
+  
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+      <div class="mb-4">
+        <label class="form__label">Usuario</label>
+        <input type="text" formControlName="username" class="form__input" placeholder="Juan Pérez" />
+        <div *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].invalid">
+            <small *ngIf="loginForm.controls['username'].errors?.['required']" class="form__error">Full Name is required.</small>
+            <small *ngIf="loginForm.controls['username'].errors?.['minlength']" class="form__error">Full Name must be at least 3 characters long.</small>
+        </div>
+        <small *ngIf="validationErrors['username']" class="form__error">
+            {{ validationErrors['username'] }}
+        </small>
+      </div>
+  
+      <div class="mb-4">
+        <label class="form__label">Contraseña</label>
+        <input type="password" formControlName="password"
+          class="form__input"
+          placeholder="********" />
+        <div *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
+          <small *ngIf="loginForm.controls['password'].errors?.['required']" class="form__error">Password is required.</small>
+          <small *ngIf="loginForm.controls['password'].errors?.['minlength']" class="form__error">Password must be at least 8 characters long.</small>
+          <small *ngIf="loginForm.controls['password'].errors?.['pattern']" class="form__error">La contraseña requiere al menos una letra mayúscula y una minúscula.</small>
+        </div>
+        <small *ngIf="validationErrors['password']" class="form__error">
+            {{ validationErrors['password'] }}
+        </small>
+      </div>
+  
+      <button type="submit"
+        class="button"
+        [disabled]="loginForm.invalid">
+        Iniciar sesión
+      </button>
+    </form>
+
+    <div *ngIf="serverError" class="mt-4 text-red-600 text-sm text-center">
+      {{ serverError }}
+    </div>
+  
+    <p class="mt-4 text-[var(--text-secondary)] text-sm">
+      ¿No tienes una cuenta?
+      <a routerLink="/register" class="text-blue-600 hover:underline">Regístrate aquí</a>
+    </p>
+    </div>
+    <app-loading-overlay [isLoading]="isLoading"></app-loading-overlay>
+  </div>
+  

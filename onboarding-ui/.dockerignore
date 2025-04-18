@@ -1,0 +1,23 @@
+# Node
+
+node_modules/
+
+# Git
+
+.git/
+.gitignore
+
+# Dev
+
+.angular/
+.vscode/
+
+# Build
+
+dist/
+
+.env
+
+# Dockerfile
+
+Dockerfile
